@@ -1,0 +1,25 @@
+github 사용법
+
+- 회원가입
+- Desktop용 gitgub 프로그램 설치
+- Git Shell을 이용하면 한글자료도 업로드가 됨
+	<git config 명령어>
+		git config --global user.name "JoongOh Ban"
+		git config --global user.email "rainyban93@gmail.com"
+		########계정정보를 넣는부분
+	<git init>
+		cd /d/C_Cplus_Class/Embedded-Study
+		git init
+		#######master가 나오면 잘 되는 것임
+	<git add>
+		git add first.c
+		######git의 준비영역으로 add함
+	<git commit>
+		git commit -m "C언어 첫날 공부한 내용(파일의 설명)"
+		#####commit로 버전관리
+	<git remote>
+		git remote add origin https://github.com/BanJoongOh/Embedded-Study
+		#####자신이 만든 repository 화면의 주소
+	<git push>
+		git push -u origin master
+		######원격저장소에 파일을 적용
