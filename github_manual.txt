@@ -3,6 +3,9 @@ github 사용법
 - 회원가입
 - Desktop용 gitgub 프로그램 설치
 - Git Shell을 이용하면 한글자료도 업로드가 됨
+	<git clone>
+		git clone https://github.com/BanJoongOh/Embedded-Study
+		###### 시작하고자 하는 폴더(D:\C_Cplus_Class\Embedded-Study)
 	<git config 명령어>
 		git config --global user.name "JoongOh Ban"
 		git config --global user.email "rainyban93@gmail.com"
