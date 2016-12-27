@@ -20,9 +20,11 @@ github 사용법
 	<git commit>
 		git commit -m "C언어 첫날 공부한 내용(파일의 설명)"
 		#####commit로 버전관리
+	/*
 	<git remote>
 		git remote add origin https://github.com/BanJoongOh/Embedded-Study
 		#####자신이 만든 repository 화면의 주소
+	*/
 	<git push>
 		git push -u origin master
 		######원격저장소에 파일을 적용
