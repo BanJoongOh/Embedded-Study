@@ -92,10 +92,12 @@ void main()
 */
 
 
-////////////////Ex1 원하는 구구단을 출력
-/*
+
+
 #include <stdio.h>
 
+////////////////Ex1 원하는 구구단을 출력
+#if 0
 void main()
 {
 	int num,count;
@@ -104,13 +106,11 @@ void main()
 	for(count=1; count<10; ++count)
 		printf("%d단 %d X %d = %d\n",num,num,count,num*count);
 }
-*/
+#endif
 
 
 ////////////////Ex2 입력한 숫자의 높이만큼 *로 정삼각형 출력
-
-#include <stdio.h>
-
+#if 1
 void main()
 {
 	int star,space,keyin,count,spacecount,starcount;
@@ -184,6 +184,17 @@ void main()
 		starcount--;
 	}
 }
+#endif
+
+
+
+
+
+
+
+
+
+
 
 
 
