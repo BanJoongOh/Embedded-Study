@@ -52,7 +52,7 @@ char* psArr[4] = {"Good","Hello","Bye","Apple"};
 
 #include <stdio.h>
 
-/*
+#if 0
 //특정 함수에서 10개의 정수를 입력 받아서 배열에 저장(홀수를 앞에 짝수를 뒤에 저장)
 void even_odd_insert(int* parr, int* ecc)
 {
@@ -116,10 +116,10 @@ void main()
 	for(count = 0; count<sizeof(arr)/sizeof(int); ++count)
 		printf("%d ",arr[count]);
 }
-*/
+#endif
 
 
-/*
+#if 0
 //포인터가 가리키는 주소를 바꿔줌
 void reverse_data(int** num1, int** num2)
 {
@@ -143,10 +143,10 @@ void main()
 	printf("*pt : %d, *pv : %d\n",*pt,*pv);
 	
 }
-*/
+#endif
 
 
-
+#if 1
 void display(char** dArr, int dcount)
 {
 	int dnum;
@@ -167,6 +167,7 @@ int alphacount(char** dArr, int acount)
 		temp = dArr[anum];
 		while(temp[count]!='\0')
 		{
+			printf("dArr[%d][%d] = %c\n",anum,count,dArr[anum][count]);
 			if(temp[count]=='l')
 				lcount++;
 			count++;
@@ -199,10 +200,10 @@ void main()
 
 	printf("알파벳 소문자 l의 갯수 : %d\n",alphacount(psArr,count));
 }
+#endif
 
 
-
-/*
+#if 0
 void menu(char** mselect, char mchoice)
 {
 	switch(mchoice)
@@ -243,7 +244,7 @@ void main()
 		fflush(stdin);	
 	}
 }
-*/
+#endif
 
 
 
