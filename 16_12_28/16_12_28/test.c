@@ -23,11 +23,9 @@ ALU -> 산술연산, 논리(T/F판단)
 
 */
 
-
-
-/*
 #include <stdio.h>
 
+#if 0
 void main()
 {
 	char ch;
@@ -39,12 +37,9 @@ void main()
 	printf("수정된 문자는 %c\n",ch);
 	printf("%d",3+5<<2|7);
 }
-*/
+#endif
 
-/*
-
-#include <stdio.h>
-
+#if 0
 void main()
 {
 	int lat,min,sec;
@@ -57,9 +52,7 @@ void main()
 	scanf("%d",&sec);
 	printf("%d도, %d분, %d초",lat,min,sec);
 }
-
-*/
- 
+#endif
 
 
 
@@ -80,21 +73,20 @@ while(count<5);
 
 */
 
-/*
-#include <stdio.h>
 
+#if 0
 void main()
 {
 	int count;
 	for(count=0; count<5; ++count);	//Non operation! 조건검사 및 증감만 반복됨
 		printf("count의 현재값은 : %d\n",count);
 }
-*/
+#endif
 
 
 
 
-#include <stdio.h>
+
 
 ////////////////Ex1 원하는 구구단을 출력
 #if 0
