@@ -40,7 +40,7 @@
 
 #include <stdio.h>
 
-/*
+#if 0
 ////////////////temp를 간접접근해서 20만들기
 void main()
 {
@@ -55,9 +55,10 @@ void main()
 	*ptr = 20;
 	printf("temp : %d\n",temp);
 }
-*/
+#endif
 
-/*
+
+#if 0
 void reverse(int* num1, int* num2)	//call by address
 {
 	int rtemp = *num1;	// rtemp = &temp
@@ -73,10 +74,10 @@ void main()
 	reverse(&temp, &val);
 	printf("temp : %d, val = %d\n",temp,val);
 }
-*/
+#endif
 
 
-/*
+#if 0
 void main()
 {
 	int temp = 0x12345678;			
@@ -89,10 +90,10 @@ void main()
 		printf("첫주소의 값은 : %x 이고 big endian입니다.\n",*ptr);
 	printf("*ptr의 세번째 값 : %x\n",*(ptr+3));
 }
-*/
+#endif
 
 
-/*
+#if 0
 void mystringcopy(char* string1, char* string2) //char* string1 = src
 {
 		printf("src주소(p) : %p\n",string1);
@@ -118,7 +119,7 @@ void main()
 	printf(" src : %s.\n",src);
 	printf("dest : %s.\n",dest);
 }
-*/
+#endif
 
 
 
