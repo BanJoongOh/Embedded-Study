@@ -139,43 +139,51 @@ void main()
 #endif
 
 
-#if 0
+#if 1
+void menu(char** mselect, char mchoice)
+{
+	switch(mchoice)
+	{
+		case 'c' :
+		case 'C' : printf("%s 하나 사자\n",mselect[0]);
+					break;
+		case 'p' :
+		case 'P' : printf("%s 배우고싶다\n",mselect[1]);
+					break;
+		case 't' :
+		case 'T' : printf("이 책은 %s로 만들었지\n",mselect[2]);
+					break;
+
+		case 'g' :
+		case 'G' : printf("%s한판할까\n",mselect[3]);
+					break;
+
+		default : printf("c, p, t, g 중에서 하나를 선택하거라.(끝내려면 q or Q) \n");
+	}
+}
+
 void main()
 {
 	char choice;
+	char* select[4] = {"Camera","Pianist","Tree","Game"};
+
 	printf("다음 선택 사항 중에서 하나를 선택하십시오. (끝내려면 q or Q)\n");
-	printf("c) camera	p) pianist \n");
-	printf("t) tree		g) game \n");
+	printf("c, p, t, g 중에서 하나를 선택하거라.\n");
+	
 	scanf("%c",&choice);
 	fflush(stdin);
-	while(choice!='Q' && choice!='q')
-	{
-		switch(choice)
-		{
-			case 'c' :
-			case 'C' : printf("카메라 하나 사자\n");
-						break;
-			case 'p' :
-			case 'P' : printf("피아노 배우고싶다\n");
-						break;
-			case 't' :
-			case 'T' : printf("이 책은 나무로 만들었지\n");
-						break;
 
-			case 'g' :
-			case 'G' : printf("시계한판할까\n");
-						break;
-
-			default : printf("c, p, t, g 중에서 하나를 선택하거라.(끝내려면 q or Q) \n");
-		}
+	while(choice!='q'&&choice!='Q')
+	{	
+		menu(select, choice);
 		scanf("%c",&choice);
-		fflush(stdin);
+		fflush(stdin);	
 	}
 }
 #endif
 
 
-
+#if 0
 void main()
 {
 	int kor,eng,math,aver;
@@ -194,7 +202,7 @@ void main()
 	else
 		printf("철수의 성적의 평균은 : %d이며, 상태는 노력중입니다\n",aver);
 }
-
+#endif
 
 
 
