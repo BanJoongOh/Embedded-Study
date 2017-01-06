@@ -34,7 +34,7 @@ comfile time : 문법적 오류 검증 & 변환
 
 #include <stdio.h>
 
-/*
+#if 0
 /////////정수 5개를 입력받아 평균을 출력하는 프로그램(배열사용)
 void main()
 {
@@ -47,9 +47,10 @@ void main()
 	}
 	printf("5개 정수 평균 : %f\n",(float)(arr[0]+arr[1]+arr[2]+arr[3]+arr[4])/5);
 }
-*/
+#endif
 
-/*
+
+#if 0
 /////////본인의 영문이름을 입력받아 출력하는 프로그램
 void main()
 {
@@ -58,11 +59,10 @@ void main()
 	scanf("%s",&name[0]);
 	printf("Full Name = %s \n",name);
 }
-*/
+#endif
 
 
-
-/*
+#if 0
 ////////성과 이름을 입력받아 제3의 문자열로 출력하기
 void main()
 {
@@ -94,11 +94,10 @@ void main()
 
 	printf("Full Name = %s \n",full);
 }
-*/
+#endif
 
 
-
-/*
+#if 0
 ///////////src에 문자열을 입력받고 dest에는 문자열을 뒤집어서 집어 넣고 회문인지 아닌지 출력할 것
 void main()
 {
@@ -128,9 +127,10 @@ void main()
 	
 	printf("src = %s\ndest = %s\n", src,dest); //출력확인용
 }
-*/
+#endif
 
-/*
+
+#if 0
 void inprint(char input, int scount)
 {
 	int incount;
@@ -156,7 +156,7 @@ void main()
 		inprint(keyin,count);
 	}
 }
-*/
+#endif
 
 
 
