@@ -81,7 +81,9 @@ free(pnew);	//주소만알려주면 할당된 메모리를 해제함
 
 #include <stdio.h>
 #include <stdlib.h>
-/*
+
+
+#if 0
 ///////////////////정수데이터 5개를 입력하는 함수, 저장된 데이터를 출력하는 함수
 int* insert();
 void display(int* dptr);
@@ -114,9 +116,11 @@ void display(int* dptr)
 		printf("정수 출력 : %d\n",*(dptr+num));
 	free(dptr);
 }
-*/
+#endif
 
 
+
+#if 1
 /////////////while & switch-case// 1.이름입력 2.이름출력 3.종료
 char* insert_name(int* icount);
 void display_name(char** dptr, int* dcount);
@@ -186,7 +190,7 @@ void display_name(char** dptr, int* dcount)
 		num++;
 	}
 }
-
+#endif
 
 
 
