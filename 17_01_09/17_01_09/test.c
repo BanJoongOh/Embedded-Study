@@ -149,7 +149,9 @@ void main()
 		if(count==5)
 		{
 			display_name(name,&count);
-			free(name);
+			//free(name);
+			for(count=0; count<5; ++count)
+				free(name[count]);	//name배열의 원소가 동적할당한 배열, 모든 heap을 다 해제해줄 것!
 			break;
 		}
 	}
