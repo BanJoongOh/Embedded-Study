@@ -149,6 +149,7 @@ void main()
 		if(count==5)
 		{
 			display_name(name,&count);
+			free(name);
 			break;
 		}
 	}
