@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "17_01_11", "17_01_11\17_01_11.vcproj", "{FC8C443C-51D2-4171-A704-B222F5F5B225}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC8C443C-51D2-4171-A704-B222F5F5B225}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FC8C443C-51D2-4171-A704-B222F5F5B225}.Debug|Win32.Build.0 = Debug|Win32
+		{FC8C443C-51D2-4171-A704-B222F5F5B225}.Release|Win32.ActiveCfg = Release|Win32
+		{FC8C443C-51D2-4171-A704-B222F5F5B225}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
