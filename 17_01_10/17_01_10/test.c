@@ -196,17 +196,18 @@ void main()
 	printf("  이름 출력 : %s\n",snack[2].title);
 	printf("  중량 출력 : %.1lf\n",snack[2].weight);
 	printf("칼로리 출력 : %d\n",snack[2].cal);
+	free(snack);
 }
 CandyBar* input_data()	// change는 snack배열의 주소를 가리키는 구조체 포인터
 {
 //	int num;
 	CandyBar* ptr = (CandyBar*)malloc(sizeof(CandyBar)*3);
-	ptr[0].title[0] = 'a';
+	ptr[0].title[0] = 'a';	//(*(ptr+0)).title[0] == ptr->title[0]	(둘다 쓰지말것)
 	ptr[0].title[1] = '\0';
 	ptr[0].weight = 10.21;
 	ptr[0].cal = 2000;
 
-	ptr[1].title[0] = 'k';
+	ptr[1].title[0] = 'k';	//(ptr+1)->title[0](쓰지말것)
 	ptr[1].title[1] = '\0';
 	ptr[1].weight = 17.28;
 	ptr[1].cal = 3500;
