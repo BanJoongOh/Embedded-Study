@@ -255,6 +255,7 @@ void main()
 
 
 
+#if 0
 /*	1. 입력 2. 출력 3. 종료 세개의 메뉴
 		입력시에 insert()함수호출
 			insert함수에서는 STU 구조체만큼 동적할당하여 메모리를 확보하고 임의의 데이터 저장
@@ -342,11 +343,12 @@ void display(STU* pastptr, int* num)
 		pastptr = pastptr->link;
 	}
 }
+#endif
 
 
 
 #if 0
-////////////////////////////역으로 출력
+////////////////////////////Linked list 역방향출력으로 출력
 typedef struct student
 {
 	char name[30];
@@ -411,6 +413,343 @@ void display(STU* pastptr, int* num)
 }
 
 #endif
+
+
+
+#if 0
+////////////////////////////Linked list 정방향 + 역방향출력으로 출력(Heap복사 이용)
+typedef struct student
+{
+	char name[30];
+	int age;
+	double score;
+	struct student* link;
+}STU;
+
+void insert(int* num, STU** start, STU** pasttemp);
+void display1(STU* pastptr, int* num);
+void display2(STU* pastptr, int* num);
+void main()
+{
+	int keyin=0;
+	int count=0;
+	int temp;
+	int modeselect;
+	STU* pasttemp = NULL;
+	STU* start = NULL;
+	while(keyin!=3)
+	{
+		printf("1. 입력\t2. 출력\t3.종료 : ");
+		scanf("%d",&keyin);
+		switch(keyin)
+		{
+		case 1 :	insert(&count,&start,&pasttemp);
+					break;
+		case 2 :	printf("출력모드 선택\n\t1. 정방향출력    2. 역방향출력    3. 이전메뉴 : ");
+					scanf("%d",&modeselect);
+					if(modeselect==1)
+						display1(start, &count);
+					else if(modeselect==2)
+						display2(start, &count);
+					else
+						printf("이전메뉴입니다 \n");
+					break;
+		case 3 :	printf("종료합니다 ^^.\n");
+					for(temp = 0; temp<count; ++temp)
+					{
+						pasttemp = start->link;
+						free(start);
+						start = pasttemp;
+					}
+					break;
+		default :	printf("똑바로 입력하거라.!\n");
+					break;
+		}
+	}
+}
+
+void insert(int* num, STU** instart, STU** inpasttemp)
+{
+	STU* temp;
+	printf("%d번째 입력입니다.\n",(*num)+1);
+	temp = (STU*)malloc(sizeof(STU));
+	printf("%d번째 이름 입력 : ",(*num)+1);
+	scanf("%s",temp->name);			//heap의 주소를 가리키기 때문에 간접접근연산자 사용
+	printf("%d번째 나이 입력 : ",(*num)+1);
+	scanf("%d",&temp->age);
+	printf("%d번째 점수 입력 : ",(*num)+1);
+	scanf("%lf",&temp->score);
+	if((*num)==0)
+	{
+		*instart = temp;
+		*inpasttemp = temp;
+	}
+	else
+	{
+		(*inpasttemp)->link = temp;
+		(*inpasttemp) = temp;
+	}
+	(*num)++;
+	printf("\n");
+}
+
+void display1(STU* pastptr, int* num)
+{
+	int count;
+	printf("\t정방향 display함수 진입 \n");
+	for(count = 0; count<(*num); ++count)
+	{
+		printf("%d번째 이름 : %10s    ",count+1,pastptr->name);
+		printf("%d번째 나이 : %5d    ",count+1,pastptr->age);
+		printf("%d번째 점수 : %5.1lf",count+1,pastptr->score);
+		printf("\n");
+		pastptr = pastptr->link;
+	}
+}
+
+void display2(STU* pastptr, int* num)
+{
+	int count,charcount;
+	STU* temp;
+	temp = (STU*)malloc(sizeof(STU)*(*num));	//전체 구조체 갯수만큼 메모리 추가 할당
+	
+	printf("\t역방향 display함수 진입 \n");
+	for(count = 0; count<(*num); ++count)		//할당된 메모리를 이용해 데이터를 역순으로 저장함
+	{
+		for(charcount = 0; pastptr->name[charcount]!=0; ++charcount)	//문자열 저장
+			temp[(*num)-1-count].name[charcount] = pastptr->name[charcount];
+		temp[(*num)-1-count].name[charcount] = '\0';	//문자열을 만들기 위해 NULL문자 추가
+		temp[(*num)-1-count].age = pastptr->age;
+		temp[(*num)-1-count].score = pastptr->score;
+		pastptr = pastptr->link;
+	}
+	for(count = 0; count<(*num); ++count)
+	{
+		printf("%d번째 이름 : %10s    ",count+1,temp[count].name);
+		printf("%d번째 나이 : %5d    ",count+1,temp[count].age);
+		printf("%d번째 점수 : %5.1lf",count+1,temp[count].score);
+		printf("\n");
+	}
+	free(temp);	//연속적으로 할당된 heap의 메모리 해제
+}
+
+#endif
+
+
+////////////////////////////Linked list 정방향+역방향 2개의 Link 생성 -> delete되는것에대해 Free를 제대로 못했음
+typedef struct student
+{
+	char name[30];
+	int age;
+	double score;
+	struct student* link1;
+	struct student* link2;
+}STU;
+
+void insert(int* num, STU** start, STU** pasttemp);
+void display1(STU* pastptr, int* num);
+void display2(STU* pastptr, int* num);
+void modify(STU* modiptr, int* num);
+void deletedata(STU** delstart, STU** delpast, int* num);
+void main()
+{
+	int keyin=0;
+	int count=0;
+	int temp;
+	int modeselect=0;
+	STU* pasttemp = NULL;
+	STU* start = NULL;
+	while(keyin!=5)
+	{
+		printf("1. 입력\t\t2. 출력\t\t3. 수정\t\t4. 삭제\t\t5. 종료 : ");
+		scanf("%d",&keyin);
+		switch(keyin)
+		{
+		case 1 :	insert(&count,&start,&pasttemp);
+					break;
+		case 2 :	while(modeselect!=3)
+					{
+						printf("\t<출력모드 선택>\n\t1. 정방향출력\t2. 역방향출력\t3. 이전메뉴 : ");
+						scanf("%d",&modeselect);
+						if(modeselect==1)
+							display1(start, &count);
+						else if(modeselect==2)
+							display2(pasttemp, &count);
+						else	//3또는 그외의 입력
+							printf("\t이전메뉴로 돌아갑니다 \n");
+					}
+					modeselect=0;//mode 초기화
+					break;
+		case 3 :	modify(start, &count);
+					break;
+		case 4 :	deletedata(&start,&pasttemp,&count);
+					break;
+		case 5 :	printf("종료합니다 ^^.\n");
+					for(temp = 0; temp<count; ++temp)
+					{
+						pasttemp = start->link1;
+						free(start);
+						start = pasttemp;
+					}
+					break;
+		default :	printf("똑바로 입력하거라.!\n");
+					break;
+		}
+		printf("\n");
+	}
+}
+
+void insert(int* num, STU** instart, STU** inpasttemp)
+{
+	STU* temp;
+	printf("\t%d번째 입력입니다.\n",(*num)+1);
+	temp = (STU*)malloc(sizeof(STU));
+
+	printf("%d번째 이름 입력 : ",(*num)+1);
+	scanf("%s",temp->name);			//heap의 주소를 가리키기 때문에 간접접근연산자 사용
+	printf("%d번째 나이 입력 : ",(*num)+1);
+	scanf("%d",&temp->age);
+	printf("%d번째 점수 입력 : ",(*num)+1);
+	scanf("%lf",&temp->score);
+
+	temp->link2 = (*inpasttemp);
+	if((*num)==0)
+	{
+		*instart = temp;
+		*inpasttemp = temp;
+	}
+	else
+	{
+		(*inpasttemp)->link1 = temp;
+		(*inpasttemp) = temp;
+	}
+	(*num)++;
+}
+
+void display1(STU* pastptr, int* num)
+{
+	int count;
+	printf("\t\t정방향 display함수 진입 \n");
+	for(count = 0; count<(*num); ++count)
+	{
+		printf("%d번째 이름 : %10s    ",count+1,pastptr->name);
+		printf("%d번째 나이 : %5d    ",count+1,pastptr->age);
+		printf("%d번째 점수 : %5.1lf",count+1,pastptr->score);
+		printf("\n");
+		pastptr = pastptr->link1;
+	}
+	printf("\n");
+}
+
+void display2(STU* pastptr, int* num)
+{
+	int count;
+	printf("\t\t역방향 display함수 진입 \n");
+	for(count = 0; count<(*num); ++count)
+	{
+		printf("%d번째 이름 : %10s    ",count+1,pastptr->name);
+		printf("%d번째 나이 : %5d    ",count+1,pastptr->age);
+		printf("%d번째 점수 : %5.1lf",count+1,pastptr->score);
+		printf("\n");
+		pastptr = pastptr->link2;
+	}
+	printf("\n");
+}
+
+void modify(STU* modiptr, int* num)
+{
+	int count,alpha,length,flag;
+	char search[30];
+	printf("\tmodify 함수 진입 \n");
+	printf("\t검색할 이름을 입력하시오 : ");
+	scanf("%s",search);
+	printf("\tSearching...\n");
+	for(count = 0; count<(*num); ++count)
+	{
+		for(length = 0; modiptr->name[length]!='\0'; ++length);	//문자열을 비교하기전에 길이를 확인!
+		for(alpha = 0; modiptr->name[alpha]!='\0'; ++alpha)
+		{
+			if(modiptr->name[alpha] == search[alpha])
+				length--;
+		}
+		printf("%d번째 이름 : %10s    ",count+1,modiptr->name);
+		if(!length)
+		{
+			printf("일치하는 이름을 찾았습니다!\n");
+			break;
+		}
+		modiptr = modiptr->link1;
+		printf("\n");
+	}
+	printf("수정하시겠습니까? (yes : 1, No : 0) : ");
+	scanf("%d",&flag);
+	if(flag)
+	{
+		printf("기존 이름은 %10s 입니다.\t 새로운 이름 : ",modiptr->name);
+		scanf("%s",modiptr->name);
+		printf("기존 나이는 %10d 입니다.\t 새로운 나이 : ",modiptr->age);
+		scanf("%d",&modiptr->age);
+		printf("기존 점수는 %10.1lf 입니다.\t 새로운 점수 : ",modiptr->score);
+		scanf("%lf",&modiptr->score);
+	}
+}
+
+void deletedata(STU** delstart, STU** delpast, int* num)
+{
+	int count,alpha,length,flag;
+	STU* buf;
+	STU* temp = *delstart;
+	char search[30];
+	printf("\tdeletedata 함수 진입 \n");
+	printf("\t검색할 이름을 입력하시오 : "); 
+	scanf("%s",search);
+	printf("\tSearching...\n");
+	for(count = 0; count<(*num); ++count)
+	{
+		for(length = 0; (*delstart)->name[length]!='\0'; ++length);	//문자열을 비교하기전에 길이를 확인!
+		for(alpha = 0; (*delstart)->name[alpha]!='\0'; ++alpha)
+		{
+			if((*delstart)->name[alpha] == search[alpha])
+				length--;
+		}
+		printf("%d번째 이름 : %10s    ",count+1,(*delstart)->name);
+		if(!length)
+		{
+			printf("일치하는 이름을 찾았습니다!\n");
+			count++;
+			break;
+		}
+		(*delstart) = (*delstart)->link1;
+		printf("\n");
+	}		//count를 이용해서 몇번째의 구조체에 해당하는지 확인
+	printf("해당 구조체를 삭제하시겠습니까? (yes : 1, No : 0) : ");
+	scanf("%d",&flag);
+	if(flag)
+	{
+		printf("\t해당 구조체의 이름은 %10s 입니다.\t 삭제합니다.\n",(*delstart)->name);
+		printf("\t해당 구조체의 나이는 %10d 입니다.\t 삭제합니다.\n",(*delstart)->age);
+		printf("\t해당 구조체의 점수는 %10.1lf 입니다.\t 삭제합니다.\n",(*delstart)->score);
+		if(count==1)	//첫번째 구조체가 삭제될 경우
+		{
+			(*delstart)->link1->link2 = temp;	//두번째 구조체 링크는 Main 구조체 주소를 가리킴
+			(*delstart) = (*delstart)->link1;	//두번째 구조체를 가리킴 
+		}//free(*delstart));
+		else if(count==(*num))	//마지막 구조체가 삭제될 경우
+		{
+			*(delpast) = (*delstart)->link2;
+			(*delstart) = temp;	//start 구조체의 주소를 복원
+		}//free(*delstart));
+		else
+		{
+			(*delstart)->link2->link1 = (*delstart)->link1;
+			(*delstart)->link1->link2 = (*delstart)->link2;
+			(*delstart) = temp;	//start 구조체의 주소를 복원
+		}//free(*delstart));
+		(*num)--;
+	}
+}
+
+
 
 
 
