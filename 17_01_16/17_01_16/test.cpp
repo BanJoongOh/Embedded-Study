@@ -189,25 +189,27 @@ void main()
 
 	set(beany, testing);	
 	
-	cout<<"함수 한번 출력\n";
+	cout<<"\t함수 한번 출력\n";
 	show(beany);		// 문자열 멤버를 한 번 출력
-	cout<<"함수 두번 출력\n";
+	cout<<"\t함수 두번 출력\n";
 	show(beany, 2);	// 문자열 멤버를 두 번 출력
 	testing[0] = 'D';
 	testing[1] = 'u';
 	
-	cout<<"testing 한번 출력\n";
+	cout<<"\ttesting 한번 출력\n";
 	show(testing);	//문자열 1회 출력
-	cout<<"testing 세번 출력\n";
+	cout<<"\ttesting 세번 출력\n";
 	show(testing, 3);	//문자열 3회 출력
 	show("Done");
+	printf("동적할당 주소 : %p",beany.str);
+	delete beany.str;
 }
 
 void set(TEST& set, char* temp)
 {
 	set.ct = strlen(temp);	//문자열의 길이를 beany 구조체에 저장
-	char* strtemp = new char(set.ct);	//문자열의 길이만큼 동적할당
-
+	char* strtemp = new char[(set.ct)+1];	//문자열의 길이+1만큼 동적할당
+	printf("동적할당 주소 : %p",strtemp);
 	strcpy(strtemp, temp);	//할당한 heap영역에 문자길이 복사
 	set.str = strtemp;		//beany구조체의 str이 heap의 주소를 가리킴
 }
