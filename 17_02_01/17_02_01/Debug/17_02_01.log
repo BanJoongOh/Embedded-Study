@@ -1,0 +1,11 @@
+﻿  main.cpp
+d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(108): warning C4477: 'scanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+  d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(108): note: 서식 문자열에서 '%hhd'을(를) 사용하는 것이 좋습니다.
+d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(108): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 'scanf' 선언을 참조하십시오.
+d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(133): warning C4477: 'scanf' : 서식 문자열 '%d'에 'int *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'char *'입니다.
+  d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(133): note: 서식 문자열에서 '%hhd'을(를) 사용하는 것이 좋습니다.
+d:\c_cplus_class\embedded-study\17_02_01\17_02_01\main.cpp(133): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1270): note: 'scanf' 선언을 참조하십시오.
+  17_02_01.vcxproj -> D:\C_Cplus_Class\Embedded-Study\17_02_01\Debug\17_02_01.exe
+  17_02_01.vcxproj -> D:\C_Cplus_Class\Embedded-Study\17_02_01\Debug\17_02_01.pdb (Full PDB)
