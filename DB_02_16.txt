@@ -1,0 +1,162 @@
+DB정리 17.02.16
+
+- %의 연산자 : like <-> not like(문자서칭)
+	ex) where ename like '%A%'  --A 앞뒤로 아무문자가 와도 상관없음
+
+- 위치에 따른 문자를 찾을때는 와일드카드(_)를 써주면됨
+	ex) where ename like '_A%'  --두번째 문자가 A인걸 찾을때
+
+- 데이터 추가
+	ex) insert into EMP(empno, ename) values (100, '영%희')
+- 데이터 검색
+	ex) where mgr is null --mgr이 null인사람 조회 ##is not도 가능함!
+- 데이터 삭제
+	ex) delete from emp where empno = 100
+- 데이터 정렬
+ 	ex) order by empno asc	--칼럼의 이름, select 순서 그리고 별명 모두 가능함!
+		--default = asc ->오름차순, desc -> 내림차순
+	##NULL이 존재한다면?
+		ex)order by comm asc nulls first
+		   order by comm asc nulls last
+	날짜 출력 순서!
+		ex) alter session set nls_date_format = 'yyyy/mm/dd'
+
+-- rowid는 오라클에서 관리함! ->접근이 빠름
+
+
+####VC에 연결
+	도구 - 데이터베이스에 연결 - oracle - xe,hr/hr
+
+
+- from dual	-- 한번만 실행하기
+- abs(절대값), floor(소수점버리기), ceil(올림), round(반올림), round(실수,반올림자릿수(+,-))
+
+
+select substr('Welcome to Oracle', -6, 6) Oracle자르기
+from dual
+
+select instr('WELCOME TO ORACLE', 'O', 6, 2) 두번째 O까지 카운트
+from dual
+
+select ename,
+	   lpad(ename, 10, '#') lpad연산, --20자리가 안되면 #을 씀
+	   rpad(ename, 10, '#') rpad연산,
+	   ltrim(ename, 'A') ltrim연습,
+	   rtrim(ename, 'D') ltrim연습,
+	   '*'||trim('      ORACLE          ')||'*', -- 양쪽 공백 자르기
+	   trim('a' from 'aaaaORACLEaaaa')  -- 양쪽 a 자르기
+from emp
+
+
+---------------------날짜함수
+
+select sysdate, sysdate-1, sysdate+7,
+	   last_day(sysdate),hiredate 입사일,
+	   sysdate - hiredate 근무일수,
+	   months_between(sysdate, hiredate) 개월수,
+	   floor(months_between(sysdate, hiredate)/12) 년수,
+	   add_months(hiredate, 10) "10개월후",
+	   round(hiredate, 'month') 반올림16일부터
+from emp
+
+
+
+---------------------날짜함수
+
+select sysdate, sysdate-1, sysdate+7,
+	   last_day(sysdate),hiredate 입사일,
+	   sysdate - hiredate 근무일수,
+	   months_between(sysdate, hiredate) 개월수,
+	   floor(months_between(sysdate, hiredate)/12) 년수,
+	   add_months(hiredate, 10) "10개월후",
+	   round(hiredate, 'month') 반올림16일부터
+from emp
+
+
+select sysdate, trunc(sysdate, 'month') 월의시작일,
+	   last_day(sysdate) 말일,
+	   next_day(sysdate, '수요일') 다음수요일
+from dual
+
+
+--------------ORACLE 형변환
+select sysdate, trunc(sysdate, 'month') 월의시작,
+	   last_day(sysdate) 말일,
+	   next_day(sysdate, '수요일') 다음수요일,
+	   to_char(hiredate, 'month') 월1,
+	   to_char(hiredate, 'mm') 월2,
+	   to_char(hiredate, 'mon') 월3,
+	   to_char(hiredate, 'rm') 월4,
+	   hiredate 입사일,
+	   to_char(hiredate, 'cc yyyy/mm/dd hh:mi:ss')
+from emp
+
+
+select empno, ename, sal, to_char(sal, '999,999,999')
+from emp
+
+insert into emp(empno, ename, sal)
+values(200,'그린티',0)
+
+
+
+
+
+form emp
+where hiredae = to_date('19930218', 'yyyymmdd')
+
+select ename, sal, comm, nvl(comm, 0), sal+nvl(comm, 0),
+	   nvl2(comm, comm+1, 0),
+	   coalesce(comm, deptno, sal) --NULL인 값을 찾음!
+from emp
+
+select ename, job, nvl(to_char(mgr),'CEO') --NULL을 CEO로 바꿔줌!
+from emp
+
+select ename, job, mgr, nvl2(mgr, mgr, 0) --NULL을 CEO로 바꿔줌!
+from emp
+
+select ename, job, mgr, nvl2(mgr, to_char(mgr), 'CEO') --NULL을 CEO로 바꿔줌!
+from emp
+
+
+
+
+
+--1000원 대 ....A
+--2000원 대 ....B
+--3000원 대 ....C
+--나머지는 ...D
+select ename, sal, floor(sal/1000),
+	   decode(floor(sal/1000),1,'A',2,'B',3,'C','D') decode연습,
+	   case floor(sal/1000) when 1 then 'A'
+	   						when 2 then 'B'
+	   						when 3 then 'C'
+	   						else 'D' end "case연습",
+	   case when sal>=1000 and sal<2000 then 'A'
+	   		when sal>=2000 and sal<3000 then 'B'
+	   		when sal>=3000 and sal<4000 then 'C'
+	   		else 'D' end "case연습2",
+	   job,
+	   case when job like '%MANAGER%' then sal*1.1
+	   		else sal*1.2 end "case연습3"
+from emp
+
+
+--직급에 따라 급여 인상
+
+select sal, job, decode(job, 'ANALYST', sal*1.05,
+					'SALESMAN', sal*1.1,
+					'MANAGER', sal*1.15,
+					'CLERK', sal*1.20, 0) 급여인상1,
+		case job when 'ANALYST' then sal*1.05
+				 when 'SALESMAN' then sal*1.1
+				 when 'MANAGER' then sal*1.15
+				 when 'CLERK' then sal*1.20
+				 else 0 end 급여인상2,
+		case when job = 'ANALYST' then sal*1.05
+			 when job = 'SALESMAN' then sal*1.1
+			 when job = 'MANAGER' then sal*1.15
+			 when job = 'CLERK' then sal*1.20
+			 else 0 end 급여인상3
+from emp
